@@ -22,7 +22,7 @@ import { ref } from "vue";
 // emits: [ "add" ],
 const emit = defineEmits(["add"]);
 
-
+// TODO :: can be reactive
 const newGrocery = ref({
         name: null,
         price: null

@@ -35,12 +35,15 @@ import AddGrocery from "./AddGrocery.vue";
 import { ref } from "vue";
 
 //data
+// TODO :: total is not needed in the grocery itself, cause it's data that can be computed
 const groceries = ref([{name: "Bread", price: 0.99, amount: 0, total: 0}]);
 
+// TODO :: make this computed
 const absoluteTotal = ref(0);
 
 //methods
 const addGrocery = (newGrocery) => {
+    // TODO :: newGrocery should be prepped in AddGrocery, not here
     newGrocery.name = newGrocery.name.charAt(0).toUpperCase() + newGrocery.name.slice(1);
     newGrocery.price = parseFloat(newGrocery.price).toFixed(2);
     newGrocery.amount = 0;
@@ -49,6 +52,7 @@ const addGrocery = (newGrocery) => {
     groceries.value.push(newGrocery)
 }
 
+// TODO :: method is not needed
 const calcGroceryTotal = (grocery) => {
     grocery.total = parseFloat((grocery.amount * grocery.price)).toFixed(2);
     absoluteTotal.value = 0;
