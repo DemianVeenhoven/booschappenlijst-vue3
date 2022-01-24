@@ -51,7 +51,11 @@ const addGrocery = (newGrocery) => {
 
 const calcGroceryTotal = (grocery) => {
     grocery.total = parseFloat((grocery.amount * grocery.price)).toFixed(2);
-    absoluteTotal.value = (parseFloat(absoluteTotal.value) + parseFloat(grocery.total)).toFixed(2);
+    absoluteTotal.value = 0;
+
+    groceries.value.forEach(element => {
+        absoluteTotal.value = (parseFloat(absoluteTotal.value) + parseFloat(element.total)).toFixed(2)
+    });
 }
 </script>
 

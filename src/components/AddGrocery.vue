@@ -20,16 +20,20 @@
 import { ref } from "vue";
 
 // emits: [ "add" ],
-const emit = defineEmits(["add"])
+const emit = defineEmits(["add"]);
 
-const action = (payload) => {
-    emit('add', payload);
-}
 
 const newGrocery = ref({
         name: null,
         price: null
 });
+
+const action = (payload) => {
+    emit('add', JSON.parse(JSON.stringify(payload)));
+
+    newGrocery.value.name = null;
+    newGrocery.value.price = null;
+}
 </script>
 
 <style scoped>
