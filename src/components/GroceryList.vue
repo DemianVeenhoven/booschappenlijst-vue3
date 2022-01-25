@@ -32,20 +32,12 @@
 
 <script setup>
 import AddGrocery from "./AddGrocery.vue";
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref} from "vue";
 
 //data
 const groceries = ref([{name: "Bread", price: 0.99, amount: 0}]);
 
 //computed
-const groceryTotal = (grocery) => computed(() => {
-    if (grocery.amount) {
-        return parseFloat((grocery.amount * grocery.price).toFixed(2));
-    }
-
-    return 0;
-});
-
 const absoluteTotal = computed(() => {
     const groceriesTotal = [];
     const reducer = function(total, num) {
