@@ -29,7 +29,12 @@ const newGrocery = ref({
 });
 
 const action = (payload) => {
-    emit('add', JSON.parse(JSON.stringify(payload)));
+    const createdGrocery = JSON.parse(JSON.stringify(payload));
+    createdGrocery.name = createdGrocery.name.charAt(0).toUpperCase() + createdGrocery.name.slice(1);
+    createdGrocery.price = parseFloat(createdGrocery.price).toFixed(2);
+    createdGrocery.amount = 0;
+
+    emit('add', createdGrocery);
 
     newGrocery.value.name = null;
     newGrocery.value.price = null;
