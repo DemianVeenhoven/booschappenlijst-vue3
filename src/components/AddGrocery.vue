@@ -6,38 +6,36 @@
     <br>
 
     <label>Price: €</label>
-    <input v-model="newGrocery.price"
+    <input v-model.number="newGrocery.price"
         placeholder="0.00" inputmode="decimal" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 "
     />
     
     <br>
     <br>
 
-    <button @click="action(newGrocery)">Add grocery</button>
+    <button @click="action()">Add grocery</button>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 
-// emits: [ "add" ],
 const emit = defineEmits(["add"]);
 
-// TODO :: can be reactive
-const newGrocery = ref({
-        name: null,
-        price: null
+const newGrocery = reactive({
+    name: null,
+    price: null,
+    amount: 0
 });
 
-const action = (payload) => {
-    const createdGrocery = JSON.parse(JSON.stringify(payload));
+const action = () => {
+    const createdGrocery = {...newGrocery}
     createdGrocery.name = createdGrocery.name.charAt(0).toUpperCase() + createdGrocery.name.slice(1);
     createdGrocery.price = parseFloat(createdGrocery.price).toFixed(2);
-    createdGrocery.amount = 0;
 
     emit('add', createdGrocery);
 
-    newGrocery.value.name = null;
-    newGrocery.value.price = null;
+    newGrocery.name = null;
+    newGrocery.price = null;
 }
 </script>
 
