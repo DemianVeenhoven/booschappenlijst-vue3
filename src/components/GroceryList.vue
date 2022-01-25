@@ -27,7 +27,7 @@
 
     <br>
 
-    <AddGrocery @add="addGrocery($event)"/>
+    <AddGrocery @add="groceries.push($event)"/>
 </template>
 
 <script setup>
@@ -39,22 +39,8 @@ const groceries = ref([{name: "Bread", price: 0.99, amount: 0}]);
 
 //computed
 const absoluteTotal = computed(() => {
-    const groceriesTotal = [];
-    const reducer = function(total, num) {
-        return total + num;
-    }
-
-    groceries.value.forEach(grocery => {
-        groceriesTotal.push(parseFloat((grocery.price * grocery.amount).toFixed(2)));
-    });
-    
-    return (groceriesTotal.reduce(reducer)).toFixed(2);
-});
-
-//methods
-const addGrocery = (newGrocery) => {
-    groceries.value.push(newGrocery)
-}
+    return groceries.value.reduce((acc, {price,amount}) => acc += price * amount, 0).toFixed(2)
+})
 </script>
 
 <style scoped>
